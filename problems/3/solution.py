@@ -8,9 +8,6 @@ class PrimeDecomposition:
         self.primes = OrderedDict([(2, True)])
         self.primes_list = [2]
 
-        self.decomposition_list = []
-        self.decomposition_check_from = 0
-
     def is_prime(self, i):
         max_prime_known = self.primes.keys()[-1]
         max_bound = int(np.ceil(np.sqrt(max_prime_known)))
@@ -44,9 +41,8 @@ class PrimeDecomposition:
     def get_known_primes(self):
         return self.primes.keys()
 
-    def decompose__(self, n, dec, start_from):
+    def decompose(self, n, dec, start_from):
         """
-        this version will fail because of the recursion
         :return: returns the largest prime factor of n
         """
         if n in self.primes or n == 1:
@@ -67,15 +63,10 @@ class PrimeDecomposition:
                     )
 
             # Case the list is not big enough
-            self.get_one_more_prime()
+            while n % self.primes_list[-1] != 0:
+                self.get_one_more_prime()
             return self.decompose(
                 n=n,
                 start_from=start_from + shift_start_from,
                 dec=dec
             )
-
-    def decompose(self, n):
-        self.decomposition_list = []
-        self.decomposition_check_from = 0
-
-        # Boucle qui trouve petit a petit les nombres premiers de la factorisation
