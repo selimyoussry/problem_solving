@@ -2,13 +2,16 @@ __author__ = 'somedude'
 
 class Eratho:
 
-    def __init__(self, maxi):
+    def __init__(self, maxi, crible=True):
         self.maxi = maxi
         self.primes = dict()
         self.cribled = False
 
         for i in range(2, self.maxi + 1):
             self.primes[i] = True
+
+        if crible:
+            self.crible()
 
     def crible(self):
         prime = 2
