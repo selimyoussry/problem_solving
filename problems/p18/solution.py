@@ -1,26 +1,25 @@
-class Triangle:
+class ArrayTriangle:
 
     def __init__(self):
-        self.data = self.read_data()
+        self.data = self.load_data()
 
-    def read_data(self):
+    def load_data(self):
         f = open('data.txt', 'r')
-
-        tree = TreeNode(0)
-
+        data = []
         for l in f:
-            nodes = map(lambda s: int(s), l.split(''))
-            for n in nodes:
-                raise NotImplementedError
+            data.append(
+                map(lambda s: int(s), l.split(' '))
+            )
+        return data
 
+    def solve(self):
+        size = len(self.data)
 
-class TreeNode:
-    def __init__(self, n, left=None, right=None):
-        """
-        :type n: n
-        :type left: TreeNode
-        :type right: TreeNode
-        """
-        self.n = n
-        self.left = left
-        self.right = right
+        for i in range(size - 2, -1, -1):
+
+            for j in range(len(self.data[i])):
+                self.data[i][j] += max(
+                    self.data[i + 1][j],
+                    self.data[i + 1][j + 1]
+                )
+        return self.data[0][0]
