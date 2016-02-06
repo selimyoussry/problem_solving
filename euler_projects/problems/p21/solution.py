@@ -34,3 +34,12 @@ class Amicable:
 
     def solve(self):
         return sum(self.amicables)
+
+def subs(n):
+    n_s = str(n)
+    out = []
+    for i in range(len(n_s)):
+        for j in range(i + 1, len(n_s)):
+            print i, j, n_s[i:j]
+            out.append(int(n_s[i:j]))
+    return out

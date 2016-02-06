@@ -1,5 +1,3 @@
-# Euler Projects, by Selim Youssry
+# Problems
 
-My personal memo of Euler projects.org problems solved.
-
-You enter this at your own risks! 
+Good for interviews
