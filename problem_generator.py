@@ -40,6 +40,7 @@ class ProblemGenerator:
             if item['type'] == self.problem_type and item['name'] == self.problem_name:
                 item['solved'] = not item['solved']
                 return True
+        print 'Could not find the problem {} / {}'.format(self.problem_type, self.problem_name)
         return False
 
     def create_new_problem(self):
