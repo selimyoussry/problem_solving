@@ -6,22 +6,23 @@ the different problems solved / to solve.
 
 # Structure
 
-./
-    db.json
-    generate.py
-    check_solved.py
-    unsolved_problems.py
-    clear_db.py
-    problem_generator.py
-    
-    misc/
-        my_problem_name_1/
-            readme.md
-            solution.py
-    my_problem_type/
-        my_problem_name_2/
-            readme.md
-            solution.py
+```
+db.json
+generate.py
+check_solved.py
+unsolved_problems.py
+clear_db.py
+problem_generator.py
+
+misc/
+    my_problem_name_1/
+        readme.md
+        solution.py
+my_problem_type/
+    my_problem_name_2/
+        readme.md
+        solution.py
+```
         
 Every problem has a:
 
