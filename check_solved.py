@@ -5,9 +5,8 @@ from problem_generator import ProblemGenerator
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('description', type=str, help='Problem description')
-    parser.add_argument('-t', '--type', type=str, default='')
-    parser.add_argument('-n', '--name', type=str, default='')
+    parser.add_argument('type', type=str)
+    parser.add_argument('name', type=str)
 
     args = parser.parse_args()
 
@@ -17,4 +16,6 @@ if __name__ == '__main__':
         problem_description=args.description
     )
 
-    pg.create_new_problem()
+    if pg.check_problem_solved():
+        print 'Problem {} - {} solved'.format(args.type, args.name)
+        pg.save_db()
