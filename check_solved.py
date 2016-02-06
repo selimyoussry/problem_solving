@@ -13,7 +13,7 @@ if __name__ == '__main__':
     pg = ProblemGenerator(
         problem_type=args.type,
         problem_name=args.name,
-        problem_description=args.description
+        problem_description=''
     )
 
     if pg.check_problem_solved():

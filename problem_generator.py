@@ -28,6 +28,13 @@ class ProblemGenerator:
             open(self.get_db_path(), 'w')
         )
 
+    @staticmethod
+    def clear_db():
+        json.dump(
+            [],
+            open(ProblemGenerator.get_db_path(), 'w')
+        )
+
     def check_problem_solved(self):
         for item in self.db:
             if item['type'] == self.problem_type and item['name'] == self.problem_name:
