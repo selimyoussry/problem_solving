@@ -12,6 +12,11 @@ class ProblemGenerator:
         self.problem_name = problem_name if problem_name != '' else str(gen_uuid.uuid4())
         self.problem_description = problem_description
 
+    def __repr__(self):
+        return '<ProblemGenerator: {} / {} / {}>'.format(
+            self.problem_type, self.problem_name, self.problem_description
+        )
+
     @staticmethod
     def get_db_path():
         return os.path.join(config.ROOT, config.DB_FILE)
@@ -35,12 +40,27 @@ class ProblemGenerator:
             open(ProblemGenerator.get_db_path(), 'w')
         )
 
+    def del_entry_from_db(self):
+        i0 = -1
+        for i in range(len(self.db)):
+            item = self.db[i]
+            if item['type'] == self.problem_type and item['name'] == self.problem_name:
+                i0 = i
+                break
+
+        if i0 == -1:
+            print 'Could not find {} in the database'.format(self)
+            raise ValueError
+
+        del self.db[i0]
+        self.save_db()
+
     def check_problem_solved(self):
         for item in self.db:
             if item['type'] == self.problem_type and item['name'] == self.problem_name:
                 item['solved'] = not item['solved']
                 return True
-        print 'Could not find the problem {} / {}'.format(self.problem_type, self.problem_name)
+        print 'Could not find the problem {}'.format(self)
         return False
 
     def create_new_problem(self):
@@ -53,7 +73,7 @@ class ProblemGenerator:
         dir_path = self.dir_structure(config.ROOT, self.problem_type, self.problem_name)
 
         if os.path.isdir(dir_path):
-            print 'Problem {}/{} already exists'.format(self.problem_type, self.problem_name)
+            print 'Problem {} already exists'.format(self)
             raise NameError
 
         # Create folder
@@ -73,7 +93,7 @@ class ProblemGenerator:
             'w'
         )
         readme.write('# {} - Problem {}\n'.format(self.problem_type, self.problem_name))
-        readme.write(self.problem_description)
+        readme.write('{}\n'.format(self.problem_description))
         readme.close()
 
         solution = open(
