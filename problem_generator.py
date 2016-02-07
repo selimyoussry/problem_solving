@@ -106,6 +106,14 @@ class ProblemGenerator:
         solution.write('# solution.py')
         solution.close()
 
+        init = open(
+            os.path.join(dir_path, '__init__.py'),
+            'w'
+        )
+        init.write('\n')
+        init.close()
+
+
     def add_to_db(self, save_db=True):
         # Add the problem to database
         self.db.append(
