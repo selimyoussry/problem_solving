@@ -18,6 +18,7 @@ class Pal:
     def find_palindromes(self):
 
         sum_pal = 0
+        palindromes = set()
 
         n = 1
         while n**2 + (n+self.d)**2 < self.N:
@@ -25,7 +26,8 @@ class Pal:
             cum_pal = n**2 + (n+self.d)**2
             k = 2
             while cum_pal < self.N:
-                if self.is_palindrome(cum_pal):
+                if self.is_palindrome(cum_pal) and cum_pal not in palindromes:
+                    palindromes.add(cum_pal)
                     sum_pal += cum_pal
                 cum_pal += ( (n + self.d * k) ** 2 )
                 k += 1
@@ -33,3 +35,16 @@ class Pal:
             n += 1
 
         return sum_pal
+
+
+import sys
+
+first = True
+
+for l in sys.stdin:
+    if first:
+        first = False
+    else:
+        N, d = map(lambda s:int(s), l.split(' '))
+        pal = Pal(N,d)
+        print pal.find_palindromes()
