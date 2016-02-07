@@ -17,5 +17,5 @@ if __name__ == '__main__':
     )
 
     if pg.check_problem_solved():
-        print 'Problem {} - {} solved'.format(args.type, args.name)
+        print 'Problem {} solved'.format(pg)
         pg.save_db()

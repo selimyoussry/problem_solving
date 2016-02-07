@@ -54,6 +54,7 @@ class ProblemGenerator:
 
         del self.db[i0]
         self.save_db()
+        print '{} deleted from db'.format(self)
 
     def check_problem_solved(self):
         for item in self.db:
@@ -85,6 +86,8 @@ class ProblemGenerator:
 
         # Add the problem to the database
         self.add_to_db()
+
+        print 'ProblemGenerator {} added'.format(self)
 
     def create_files(self, dir_path):
         # Now create readme.md and solution.py

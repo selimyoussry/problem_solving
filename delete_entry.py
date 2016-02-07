@@ -16,4 +16,3 @@ if __name__ == '__main__':
     )
 
     pg.del_entry_from_db()
-
