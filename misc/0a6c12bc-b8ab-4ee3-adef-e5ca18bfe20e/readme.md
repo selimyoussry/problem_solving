@@ -1,6 +1,8 @@
 # misc - Problem 0a6c12bc-b8ab-4ee3-adef-e5ca18bfe20e
 minimum steps to one
 
+Found here: https://www.codechef.com/wiki/tutorial-dynamic-programming
+
 Problem Statement: On a positive integer, you can perform any one of the following 3 steps.
 
 1. Subtract 1 from it. ( n = n - 1 ) 
