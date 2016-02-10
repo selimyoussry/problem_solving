@@ -1,6 +1,6 @@
 # solution.py
 
-my_sum = 200
+target = 200
 coins = [200, 100, 50, 20, 10, 5, 2, 1]
 
 
@@ -34,11 +34,11 @@ class Solver:
     def solve_rec(self, t):
         for child in t.children:
             coin_value, a, cum_sum, index, path = child.data
-            if cum_sum == my_sum:
+            if cum_sum == target:
                 self.paths.append(path)
                 self.n_solutions += 1
             elif coin_value == 2:  # i.e. coin_value == 1
-                new_path = path + [(1, my_sum - cum_sum)]
+                new_path = path + [(1, target - cum_sum)]
                 self.paths.append(new_path)
                 self.n_solutions += 1
             else:
@@ -48,7 +48,7 @@ class Solver:
                 new_cum_sum = new_a * new_coin_value + cum_sum
                 new_path = path + [(new_coin_value, new_a)]
                 new_tree = Node(())
-                while new_cum_sum <= my_sum:
+                while new_cum_sum <= target:
                     new_tree.add_child(
                         Node(
                             (new_coin_value, new_a, new_cum_sum, new_index, new_path)
@@ -64,7 +64,7 @@ class Solver:
 
     def nested_loops(self):
         n = 0
-        for a in range(my_sum, -1, -200):
+        for a in range(target, -1, -200):
             for b in range(a, -1, -100):
                 for c in range(b, -1, -50):
                     for d in range(c, -1, -20):
@@ -73,3 +73,20 @@ class Solver:
                                 for g in range(f, -1, -2):
                                     n += 1
         return n
+
+    def dn(self):
+        """
+        dynamic programming
+        the number of ways to make y are the number of ways to make
+        (y - x) + the number of ways to make x
+        :return:
+        """
+        ways = [1] + [0] * target
+        for coin in coins:
+            ways[coin] = 1
+
+        for y in range(2, target + 1):
+            for x in range(0, y):
+                ways[y] = ways[y - x] + ways[x]
+
+        return ways
