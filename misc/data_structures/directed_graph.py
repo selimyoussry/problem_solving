@@ -1,15 +1,16 @@
 from collections import deque
 
 
-class UndirectedGraph:
+class DirectedGraph:
 
-    def __init__(self, al):
+    def __init__(self, al, n):
         """
-        :param al: adjacency list (dict of vertex: set(edges))
+        :param al: adjacency list
         :return:
         """
+
         self.al = al
-        self.n = len(self.al)
+        self.n = n
 
     def bfs(self, s):
         """
@@ -47,38 +48,31 @@ class UndirectedGraph:
 
         return distances, parents, explored
 
-    def dfs(self, s_):
+    def dfs(self):
         """
-        :param s: start node
         :return:
         """
-
-        explored = {s_}
+        explored = set()
+        nodes_label = dict([(node, -1) for node in self.al])
+        current_label = [self.n]
 
         def dfs_rec(s):
-            unexplored_neighbors = deque([node for node in self.al[s] if node not in explored])
+            unexplored_neighbors = deque([v for v in self.al[s] if v not in explored]) if s in self.al else deque()
 
             print 'Starting dfs_rec with {}, discovered so far {} - {}'.format(s, explored, unexplored_neighbors)
 
-            for node in unexplored_neighbors:
-                explored.add(node)
+            for v in unexplored_neighbors:
+                explored.add(v)
             while len(unexplored_neighbors) > 0:
                 start_node = unexplored_neighbors.popleft()
                 dfs_rec(start_node)
-        dfs_rec(s_)
 
-    def connected_components(self):
-        components = dict([(node, -1) for node in self.al])
-        current_component = 0
+            print 'Assigning label {} to {}'.format(current_label[0], s)
+            nodes_label[s] = current_label[0]
+            current_label[0] -= 1
 
-        explored = set()
+        for vertex in self.al:
+            if vertex not in explored:
+                dfs_rec(vertex)
 
-        for node in self.al:
-            if node not in explored:
-                _, _, this_explored = self.bfs(node)
-                for elt in this_explored:
-                    explored.add(elt)
-                    components[elt] = current_component
-                current_component += 1
-
-        return components
+        return nodes_label
