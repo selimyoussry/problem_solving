@@ -45,7 +45,7 @@ class UndirectedGraph:
                 parents[node] = c_node
                 explored.add(node)
 
-        return distances, parents
+        return distances, parents, explored
 
     def dfs(self, s):
         """
@@ -66,3 +66,19 @@ class UndirectedGraph:
                 start_node = unexplored_neighbors.popleft()
                 dfs_rec(start_node)
         dfs_rec(s)
+
+    def connected_components(self):
+        components = dict([(node, -1) for node in self.al])
+        current_component = 0
+
+        explored = set()
+
+        for node in self.al:
+            if node not in explored:
+                _, _, this_explored = self.bfs(node)
+                for elt in this_explored:
+                    explored.add(elt)
+                    components[elt] = current_component
+                current_component += 1
+
+        return components
