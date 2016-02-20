@@ -46,3 +46,23 @@ class UndirectedGraph:
                 explored.add(node)
 
         return distances, parents
+
+    def dfs(self, s):
+        """
+        :param s: start node
+        :return:
+        """
+
+        explored = {s}
+
+        def dfs_rec(s):
+            unexplored_neighbors = deque([node for node in self.al[s] if node not in explored])
+
+            print 'Starting dfs_rec with {}, discovered so far {} - {}'.format(s, explored, unexplored_neighbors)
+
+            for node in unexplored_neighbors:
+                explored.add(node)
+            while len(unexplored_neighbors) > 0:
+                start_node = unexplored_neighbors.popleft()
+                dfs_rec(start_node)
+        dfs_rec(s)
