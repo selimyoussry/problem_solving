@@ -28,3 +28,4 @@ The man who smokes Blend has a neighbor who drinks water
 
 The Question:
 Who has fish for a pet? (I would then give them the Background, Clues, and Question in writing and offer them a white board market and ask them to show me their work.)
+
