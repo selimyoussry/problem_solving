@@ -16,7 +16,11 @@ def quicksort_(a, lo, hi):
         quicksort_(a, lo, p-1)
         quicksort_(a, p+1, hi)
 
+
 def partition(a, lo, hi):
+    # returns an index of an element that is at the correct position
+    # everything on the right is greater
+    # everything on the left is lower
     pivot = a[hi]
 
     p = lo

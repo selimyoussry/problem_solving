@@ -5,6 +5,7 @@ def swap(a, i, j):
     a[j] = tmp_a_i
 
 def bubble_sort(a):
+
     lo = 0
     hi = len(a) - 2
     n_swaps = 1

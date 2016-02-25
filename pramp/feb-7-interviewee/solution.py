@@ -4,7 +4,7 @@ def find_cap(g, b):
     s_b = sorted(g)
 
     total = sum(g)
-    
+
     if total <= b:
         return s_b[-1]
 
